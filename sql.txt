@@ -1,0 +1,126 @@
+﻿CREATE TABLE tbl_users(
+    user_id INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 0, INCREMENT BY 1),
+    username VARCHAR(32) NOT NULL,
+    password VARCHAR (32),
+    f_name VARCHAR(50),
+    l_name VARCHAR(50),
+    gender CHARACTER,
+    b_date DATE,
+    account_type_id INTEGER,
+    CONSTRAINT user_pk PRIMARY KEY (user_id)
+);
+
+
+CREATE TABLE tbl_account_type(
+    account_type_id INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    account_type VARCHAR(20),
+    CONSTRAINT account_type_pk PRIMARY KEY (account_type_id)
+);
+
+
+CREATE TABLE tbl_partylists(
+    partylist_id INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    partylist VARCHAR(32),
+    CONSTRAINT pk_partylists PRIMARY KEY (partylist_id)
+);
+
+
+CREATE TABLE tbl_candidates (
+    candidate_id INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    first_name VARCHAR(32),
+    last_name VARCHAR(32),
+    sex CHARACTER,
+    birth_date DATE,
+    position_id INTEGER,
+    partylist_id INTEGER,
+    votes INTEGER,
+    CONSTRAINT candidate_pk PRIMARY KEY (candidate_id)
+);
+CREATE TABLE tbl_positions (
+    position_id INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    position_name VARCHAR(32),
+    votes_allowed INTEGER,
+    CONSTRAINT position_pk PRIMARY KEY (position_id)
+);
+
+
+CREATE TABLE temp_users(
+    temp_id INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    username VARCHAR(32) NOT NULL,
+    password VARCHAR (32),
+    f_name VARCHAR(50),
+    l_name VARCHAR(50),
+    gender CHARACTER,
+    b_date DATE,
+    CONSTRAINT temp_pk PRIMARY KEY(temp_id)
+);
+
+
+CREATE TABLE tbl_voters (
+    voter_id INTEGER GENERATED ALWAYS AS IDENTITY(START WITH 1, INCREMENT BY 1),
+    user_id INTEGER,
+    has_voted BOOLEAN,
+    CONSTRAINT voter_pk PRIMARY KEY(voter_id)
+);
+
+
+
+
+INSERT INTO tbl_account_type (account_type) VALUES ('super admin'),
+(‘admin’),
+(‘voter’);
+
+
+INSERT INTO tbl_users (username, password, f_name, l_name, gender, b_date, account_type_id) VALUES ('root', 'root', 'System', 'Administrator', 'm', '8/22/2002', 1),
+(‘admin’, ‘admin’, ‘Admin’, ‘admin’, ‘m’, ‘8/22/2002’, 2),
+(‘voter’, ‘voter’, ‘Voter’, ‘voter’, ‘m’, ‘8/22/2002’, 3);
+
+
+INSERT INTO tbl_candidates(first_name, last_name, sex, birth_date, position_id, partylist_id, votes) 
+    VALUES ('Windell','Tesoro','m','11/11/1111',1,1,0),
+('Coats','Manny','m','01/01/2001',2,1,0),
+('Joselito','Bandogol','f','01/01/2001',3,1,0),
+('Alyanna','Tambiokol','f','02/02/2002',3,1,0),
+('Anghelito','Natividad','f','03/03/2003',3,1,0),
+('Aybi Georjana','Basuka','m','04/04/2004',3,1,0),
+('Lord Patawad','De Guzman','m','05/05/2005',3,1,0),
+('Jake Rice','Gaviranian','m','06/06/2006',3,1,0),
+('Edgardo','Caluwang','m','07/07/2007',3,1,0),
+('Jessica','Soco','f','08/08/2008',3,1,0),
+
+
+('Jethro','Estangki','m','11/11/1111',1,2,0),
+('Taps','Silog','m','01/01/2001',2,2,0),
+('Cadro','Carding','m','01/01/2001',3,2,0),
+('Koreano','Bisayang','m','02/02/2002',3,2,0),
+('Pogi','Rafael','m','03/03/2003',3,2,0),
+('Angelica','Tambio','f','04/04/2004',3,2,0),
+('Cardo','Dalisay','m','05/05/2005',3,2,0),
+('Josie','Starla','f','06/06/2006',3,2,0),
+('Jonell','Mejia','m','07/07/2007',3,2,0),
+('Jecris','Gaviran','m','08/08/2008',3,2,0),
+
+
+('Raymundo','De Lion','m','11/11/1111',1,3,0),
+('Gardo','Dalisay','m','01/01/2001',2,3,0),
+('Neneng','Bayang','f','01/01/2001',3,3,0),
+('Rossi','Potti','m','02/02/2002',3,3,0),
+('Caps','De Futs','m','03/03/2003',3,3,0),
+('Bakshi','Babu','m','04/04/2004',3,3,0),
+('Helmeets','Cuda Eals','m','05/05/2005',3,3,0),
+('Boyka','Egor','m','07/07/2007',3,3,0),
+('Uvuvwevwevwe','Ossas','m','08/08/2008',3,3,0);
+
+
+INSERT INTO tbl_partylists (partylist) 
+VALUES ('Shapi'),
+('Bisayang Koreano'),
+('Gardo Dalisay');
+
+
+
+
+INSERT INTO tbl_positions (position_name, votes_allowed) 
+    VALUES ('President', 1),
+('Vice President', 1),
+('Councilor', 8);
